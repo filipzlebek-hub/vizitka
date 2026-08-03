@@ -14,17 +14,11 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --navy:#1A1A2E; --yellow:#F9A825;
-    --ink:#0F1115; --amber:#F5A623;
-    --bg:#f2f2f0; --card:#fff; --border:#e8e8e8; --muted:#999;
-  }
+  :root{--navy:#1A1A2E;--yellow:#F9A825;--ink:#0F1115;--amber:#F5A623;--bg:#f2f2f0;--card:#fff;--border:#e8e8e8;--muted:#999}
   *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
   body{background:var(--bg);min-height:100dvh;font-family:'DM Sans',sans-serif;color:var(--navy);display:flex;flex-direction:column;align-items:center;padding:20px 16px 40px}
   .wrap{width:100%;max-width:420px;display:flex;flex-direction:column;gap:10px}
   @keyframes rise{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
-
-  /* ── IDENTITY CARD ── */
   .id-card{background:var(--card);border-radius:24px;border:1px solid var(--border);box-shadow:0 4px 24px rgba(0,0,0,.07);overflow:hidden;animation:rise .5s cubic-bezier(.16,1,.3,1) both}
   .id-bar{height:5px;background:linear-gradient(90deg,var(--navy) 0%,var(--yellow) 50%,var(--amber) 100%)}
   .id-body{padding:24px 24px 20px}
@@ -32,74 +26,41 @@
   .name{font-family:'DM Serif Display',serif;font-size:30px;line-height:1.1;letter-spacing:-.4px}
   .title{margin-top:4px;font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--yellow)}
   .quote{margin-top:14px;padding:10px 13px;border-left:3px solid var(--yellow);background:#fffbf0;border-radius:0 10px 10px 0;font-size:12px;font-style:italic;color:#555;line-height:1.6}
-
-  /* ── SECTION LABEL ── */
-  .section-head{
-    display:flex;align-items:center;gap:10px;
-    padding:0 2px;
-  }
+  .section-head{display:flex;align-items:center;gap:10px;padding:0 2px}
   .section-label{font-size:9px;font-weight:600;letter-spacing:1.8px;text-transform:uppercase;color:var(--muted);white-space:nowrap}
   .section-line{flex:1;height:1px;background:var(--border)}
-
-  /* ── CONTACTS CARD ── */
   .contacts-card{background:var(--card);border-radius:20px;border:1px solid var(--border);padding:16px;display:flex;flex-direction:column;gap:7px;animation:rise .5s .07s cubic-bezier(.16,1,.3,1) both}
-
-  /* Soláry řádky */
   a.row{display:flex;align-items:center;gap:12px;padding:9px 11px;border-radius:12px;background:#fafaf8;border:1px solid var(--border);text-decoration:none;color:var(--navy);transition:background .14s,border-color .14s,transform .14s;-webkit-tap-highlight-color:transparent}
   a.row:hover,a.row:active{background:#fffbf0;border-color:var(--yellow);transform:translateX(3px)}
   .ico{width:32px;height:32px;border-radius:9px;background:#fff8e1;display:flex;align-items:center;justify-content:center;flex-shrink:0}
   .ico svg{width:15px;height:15px;fill:var(--yellow)}
   .lbl{font-size:9px;font-weight:600;letter-spacing:.8px;text-transform:uppercase;color:var(--muted)}
   .val{font-size:13px;color:var(--navy);margin-top:1px}
-
-  /* Řešíme řádky */
-  a.row-r{display:flex;align-items:center;gap:12px;padding:9px 11px;border-radius:12px;background:#f8f8f7;border:1px solid #e0e0de;text-decoration:none;color:var(--ink);transition:background .14s,border-color .14s,transform .14s;-webkit-tap-highlight-color:transparent}
-  a.row-r:hover,a.row-r:active{background:#fffbf0;border-color:var(--amber);transform:translateX(3px)}
-  .ico-r{width:32px;height:32px;border-radius:9px;background:var(--ink);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+  .resime-card{background:var(--ink);border-radius:20px;padding:16px;display:flex;flex-direction:column;gap:7px;animation:rise .5s .1s cubic-bezier(.16,1,.3,1) both}
+  .logo-resime{height:36px;display:flex;align-items:center;margin-bottom:2px}.logo-resime svg{height:36px;width:auto}
+  .section-label-r{font-size:9px;font-weight:600;letter-spacing:1.8px;text-transform:uppercase;color:rgba(255,255,255,.35);white-space:nowrap}
+  .section-line-r{flex:1;height:1px;background:rgba(255,255,255,.1)}
+  a.row-r{display:flex;align-items:center;gap:12px;padding:9px 11px;border-radius:12px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);text-decoration:none;color:#fff;transition:background .14s,border-color .14s,transform .14s;-webkit-tap-highlight-color:transparent}
+  a.row-r:hover,a.row-r:active{background:rgba(245,166,35,.12);border-color:var(--amber);transform:translateX(3px)}
+  .ico-r{width:32px;height:32px;border-radius:9px;background:rgba(245,166,35,.15);display:flex;align-items:center;justify-content:center;flex-shrink:0}
   .ico-r svg{width:15px;height:15px;fill:var(--amber)}
-  .val-r{font-size:13px;color:var(--ink);margin-top:1px}
-
-  /* Řešíme.To brand badge */
-  .resime-badge{
-    display:flex;align-items:center;gap:8px;
-    padding:8px 12px;
-    background:var(--ink);
-    border-radius:10px;
-    margin-bottom:4px;
-  }
-  .resime-wordmark{
-    font-family:'DM Sans',sans-serif;
-    font-size:14px;font-weight:600;
-    color:#fff;letter-spacing:-.3px;
-  }
-  .resime-wordmark span{color:var(--amber)}
-  .resime-tag{
-    margin-left:auto;
-    font-size:9px;font-weight:500;letter-spacing:1px;text-transform:uppercase;
-    color:rgba(255,255,255,.4);
-  }
-
-  /* ── BUTTONS ── */
+  .lbl-r{font-size:9px;font-weight:600;letter-spacing:.8px;text-transform:uppercase;color:rgba(255,255,255,.4)}
+  .val-r{font-size:13px;color:#fff;margin-top:1px}
   .btn-install{display:none;align-items:center;justify-content:center;gap:10px;width:100%;padding:14px 20px;background:var(--yellow);color:var(--navy);border:none;border-radius:16px;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:600;cursor:pointer;text-decoration:none;box-shadow:0 6px 20px rgba(249,168,37,.3);transition:filter .18s,transform .15s;-webkit-tap-highlight-color:transparent;animation:rise .5s .04s cubic-bezier(.16,1,.3,1) both}
   .btn-install.visible{display:flex}
   .btn-install svg{width:19px;height:19px;fill:var(--navy);flex-shrink:0}
-  .btn-save{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;padding:14px 20px;background:var(--navy);color:#fff;border:none;border-radius:16px;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:600;cursor:pointer;text-decoration:none;box-shadow:0 6px 20px rgba(26,26,46,.2);transition:background .18s,transform .15s;-webkit-tap-highlight-color:transparent;animation:rise .5s .12s cubic-bezier(.16,1,.3,1) both}
+  .btn-save{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;padding:14px 20px;background:var(--navy);color:#fff;border:none;border-radius:16px;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:600;cursor:pointer;text-decoration:none;box-shadow:0 6px 20px rgba(26,26,46,.2);transition:background .18s,transform .15s;-webkit-tap-highlight-color:transparent;animation:rise .5s .15s cubic-bezier(.16,1,.3,1) both}
   .btn-save:hover{background:#2a2a50;transform:translateY(-2px)}
   .btn-save svg{width:19px;height:19px;fill:var(--yellow);flex-shrink:0}
-
-  /* ── QR ── */
-  .qr-card{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:16px 18px;display:flex;align-items:center;gap:16px;animation:rise .5s .18s cubic-bezier(.16,1,.3,1) both}
+  .qr-card{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:16px 18px;display:flex;align-items:center;gap:16px;animation:rise .5s .2s cubic-bezier(.16,1,.3,1) both}
   #qrcode canvas,#qrcode img{border-radius:8px;display:block}
   .qr-title{font-size:10px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:var(--navy);margin-bottom:3px}
   .qr-sub{font-size:11.5px;color:var(--muted);line-height:1.5}
-
-  .footer{text-align:center;font-size:10px;color:#bbb;line-height:1.8;animation:rise .5s .24s cubic-bezier(.16,1,.3,1) both}
+  .footer{text-align:center;font-size:10px;color:#bbb;line-height:1.8;animation:rise .5s .25s cubic-bezier(.16,1,.3,1) both}
 </style>
 </head>
 <body>
 <div class="wrap">
-
-  <!-- IDENTITY -->
   <div class="id-card">
     <div class="id-bar"></div>
     <div class="id-body">
@@ -109,13 +70,8 @@
       <div class="quote">„Papír snese všechno, střecha ne.<br>Projektujeme reálné úspory, ne prodejní sny."</div>
     </div>
   </div>
-
-  <!-- CONTACTS: Soláry Na Klíč -->
   <div class="contacts-card">
-    <div class="section-head">
-      <span class="section-label">Nové instalace</span>
-      <div class="section-line"></div>
-    </div>
+    <div class="section-head"><span class="section-label">Nové instalace</span><div class="section-line"></div></div>
     <a class="row" href="tel:+420773123456">
       <div class="ico"><svg viewBox="0 0 24 24"><path d="M6.62 10.79a15.05 15.05 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.02-.24c1.12.37 2.33.57 3.56.57a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.56a1 1 0 0 1-.25 1.02l-2.2 2.21z"/></svg></div>
       <div><div class="lbl">Telefon</div><div class="val">+420 773 123 456</div></div>
@@ -129,55 +85,43 @@
       <div><div class="lbl">Web</div><div class="val">www.solarynaklic.cz</div></div>
     </a>
   </div>
-
-  <!-- CONTACTS: Řešíme.To -->
-  <div class="contacts-card">
-    <div class="section-head">
-      <span class="section-label">Servis &amp; revize</span>
-      <div class="section-line"></div>
+  <div class="resime-card">
+    <div class="section-head" style="padding:0 2px;margin-bottom:2px">
+      <span class="section-label-r">Servis &amp; revize</span>
+      <div class="section-line-r"></div>
     </div>
-    <div class="resime-badge">
-      <div class="resime-wordmark">řešíme to<span>•</span></div>
-      <span class="resime-tag">servisní divize</span>
-    </div>
+    <div class="logo-resime"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 222 56"><text x="0" y="41" font-family="-apple-system,'Segoe UI','Helvetica Neue',Arial,sans-serif" font-size="36" font-weight="700" fill="#FFFFFF" letter-spacing="-0.01em">Řešíme.to</text><circle cx="179" cy="38" r="6" fill="#F5A623"/></svg></div>
     <a class="row-r" href="tel:+420773654321">
       <div class="ico-r"><svg viewBox="0 0 24 24"><path d="M6.62 10.79a15.05 15.05 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.02-.24c1.12.37 2.33.57 3.56.57a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.56a1 1 0 0 1-.25 1.02l-2.2 2.21z"/></svg></div>
-      <div><div class="lbl">Servisní linka</div><div class="val-r">+420 773 654 321</div></div>
+      <div><div class="lbl-r">Servisní linka</div><div class="val-r">+420 773 654 321</div></div>
     </a>
     <a class="row-r" href="mailto:info@resime.to">
       <div class="ico-r"><svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg></div>
-      <div><div class="lbl">Email</div><div class="val-r">info@resime.to</div></div>
+      <div><div class="lbl-r">Email</div><div class="val-r">info@resime.to</div></div>
     </a>
     <a class="row-r" href="https://resime.to" target="_blank">
       <div class="ico-r"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg></div>
-      <div><div class="lbl">Web</div><div class="val-r">www.resime.to</div></div>
+      <div><div class="lbl-r">Web</div><div class="val-r">www.resime.to</div></div>
     </a>
   </div>
-
   <button class="btn-install" id="installBtn">
     <svg viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zm-8 2V5h2v6h1.17L12 13.17 9.83 11H11zm-6 7h14v2H5v-2z"/></svg>
     Přidat na plochu telefonu
   </button>
-
   <a class="btn-save" id="saveBtn" href="#" download="Filip_Zlebek.vcf">
     <svg viewBox="0 0 24 24"><path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"/></svg>
     Uložit do kontaktů
   </a>
-
   <div class="qr-card">
     <div id="qrcode"></div>
     <div><div class="qr-title">Sdílej vizitku</div><div class="qr-sub">Naskenuj a otevři<br>tuto stránku v telefonu</div></div>
   </div>
-
   <div class="footer">FuzzyCorp s.r.o. &nbsp;·&nbsp; IČO: 04679211 &nbsp;·&nbsp; Kaprova 42/14, Praha 1</div>
-
 </div>
 <script>
 new QRCode(document.getElementById("qrcode"),{text:"https://filipzlebek-hub.github.io/vizitka",width:96,height:96,colorDark:"#1A1A2E",colorLight:"#ffffff",correctLevel:QRCode.CorrectLevel.M});
-
 const vcf=["BEGIN:VCARD","VERSION:3.0","FN:Filip Žlebek","N:Žlebek;Filip;;;","ORG:FuzzyCorp s.r.o.","TITLE:Jednatel & expert na energetiku","TEL;TYPE=CELL,PREF:+420773123456","TEL;TYPE=WORK:+420773654321","EMAIL;TYPE=PREF:chci@solarynaklic.cz","EMAIL:info@resime.to","URL;TYPE=PREF:https://solarynaklic.cz","URL:https://resime.to","ADR;TYPE=WORK:;;Kaprova 42/14;Praha 1;;110 00;CZ","NOTE:Soláry Na Klíč | Řešíme.To – servisní divize","END:VCARD"].join("\r\n");
 document.getElementById("saveBtn").href=URL.createObjectURL(new Blob([vcf],{type:"text/vcard;charset=utf-8"}));
-
 let deferredPrompt;
 window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();deferredPrompt=e;document.getElementById('installBtn').classList.add('visible')});
 document.getElementById('installBtn').addEventListener('click',async()=>{if(!deferredPrompt)return;deferredPrompt.prompt();const{outcome}=await deferredPrompt.userChoice;deferredPrompt=null;if(outcome==='accepted')document.getElementById('installBtn').classList.remove('visible')});
